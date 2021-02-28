@@ -54,7 +54,6 @@ export default function Login({ history }) {
 
     return (
         <Container component="main" maxWidth="xs">
-            {JSON.stringify(info)}
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

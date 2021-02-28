@@ -9,6 +9,7 @@ import store from "./state/store";
 import theme from "./theme";
 import Home from "./views/Home";
 import Login from "./views/Login";
+import Logout from "./views/Logout";
 
 function Index() {
     const notistackRef = React.createRef();
@@ -39,6 +40,7 @@ function App() {
                 <Switch>
                     <Route path="/login" component={Login} exact />
                     <PrivateRoute path={["/:id", "/"]} component={Home} exact />
+                    <Route exact path="/auth/logout" component={Logout} />
                     <Route path="*" component={() => <Redirect to="/" />} />
                 </Switch>
             </BrowserRouter>

@@ -13,6 +13,14 @@ body {
     flex-direction: column;
 }
 
+a {
+    color: $primary;
+}
+
+.footer {
+    padding: 13px;
+}
+
 .winners-list {
     min-height: 220px;
     user-select: none;

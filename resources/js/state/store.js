@@ -9,6 +9,10 @@ export default createStore(
                 setUser: action((state, payload) => {
                     state.info = payload;
                 }),
+                logout: action((state, callback) => {
+                    state.info = {};
+                    callback();
+                }),
             },
             {
                 storage: "localStorage",

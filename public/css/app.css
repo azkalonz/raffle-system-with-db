@@ -10,6 +10,14 @@ body {
   flex-direction: column;
 }
 
+a {
+  color: #0079f5;
+}
+
+.footer {
+  padding: 13px;
+}
+
 .winners-list {
   min-height: 220px;
   -webkit-user-select: none;
