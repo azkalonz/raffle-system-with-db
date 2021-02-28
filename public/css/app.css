@@ -18,6 +18,8 @@ body {
       -ms-user-select: none;
           user-select: none;
   position: relative;
+}
+.winners-list .MuiTabs-root {
   border-bottom: 1px solid #dddddd;
 }
 .winners-list:hover .toolbar,
@@ -81,7 +83,6 @@ body {
   position: relative;
   max-height: 190px;
   min-width: 440px;
-  padding: 30px 0 0 0;
   border-right: 1px solid #dddddd;
 }
 .winner-container .winner {

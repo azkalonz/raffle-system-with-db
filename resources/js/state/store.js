@@ -46,7 +46,7 @@ export default createStore(
                 state.winners = payload;
             }),
             addWinner: action((state, payload) => {
-                state.winners.push(payload);
+                state.winners.unshift(payload);
             }),
         }),
     },

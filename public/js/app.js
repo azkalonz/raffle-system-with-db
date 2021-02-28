@@ -20461,6 +20461,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var MAX_NAMES = MAX_NAMES;
+var winnerIndex = 970;
 
 function Raffler() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
@@ -20481,14 +20483,17 @@ function Raffler() {
   var _useStoreState = (0,easy_peasy__WEBPACK_IMPORTED_MODULE_0__.useStoreState)(function (states) {
     return states.participants;
   }),
-      participants = _useStoreState.participants;
+      theParticipants = _useStoreState.participants;
+
+  var participants = (theParticipants === null || theParticipants === void 0 ? void 0 : theParticipants.length) < MAX_NAMES ? new Array(MAX_NAMES - theParticipants.length).fill(0).map(function (q) {
+    return (0,lodash__WEBPACK_IMPORTED_MODULE_1__.sample)(theParticipants);
+  }).concat(theParticipants) : (theParticipants === null || theParticipants === void 0 ? void 0 : theParticipants.length) > MAX_NAMES ? theParticipants.slice(0, MAX_NAMES) : theParticipants;
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(),
       _useState6 = _slicedToArray(_useState5, 2),
       winner = _useState6[0],
       setWinner = _useState6[1];
 
-  var winnerIndex = participants.length - 30;
   var namesRef = (0,react__WEBPACK_IMPORTED_MODULE_2__.useRef)();
 
   var nameSize = function nameSize() {
@@ -20561,7 +20566,7 @@ function Raffler() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         ref: namesRef,
         className: "participants",
-        children: participants.map(function (p, i) {
+        children: participants.slice(0, winnerIndex + 30).map(function (p, i) {
           return i === winnerIndex ? winner || p : p;
         }).reverse().map(function (participant) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -20569,21 +20574,16 @@ function Raffler() {
           }, (0,lodash__WEBPACK_IMPORTED_MODULE_1__.uniqueId)());
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       style: {
         display: "flex"
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         onClick: function onClick() {
-          loop(20, 1, participants.length - 30);
+          loop(20, 1, winnerIndex);
         },
         children: "Spin"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-        onClick: function onClick() {
-          revealWinner();
-        },
-        children: "reveal"
-      })]
+      })
     })]
   }) : null;
 }
@@ -21005,7 +21005,7 @@ __webpack_require__.r(__webpack_exports__);
       state.winners = payload;
     }),
     addWinner: (0,easy_peasy__WEBPACK_IMPORTED_MODULE_0__.action)(function (state, payload) {
-      state.winners.push(payload);
+      state.winners.unshift(payload);
     })
   })
 }, {

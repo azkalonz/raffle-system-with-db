@@ -3,13 +3,27 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { random, sample, uniqueId } from "lodash";
 import React, { useCallback, useRef, useState } from "react";
 
+const MAX_NAMES = MAX_NAMES;
+const winnerIndex = 970;
+
 function Raffler() {
     const [saving, setSaving] = useState(false);
     const [loading, setLoading] = useState(false);
     const { addWinner } = useStoreActions((states) => states.winners);
-    const { participants } = useStoreState((states) => states.participants);
+    const { participants: theParticipants } = useStoreState(
+        (states) => states.participants
+    );
+    const participants =
+        theParticipants?.length < MAX_NAMES
+            ? new Array(MAX_NAMES - theParticipants.length)
+                  .fill(0)
+                  .map((q) => sample(theParticipants))
+                  .concat(theParticipants)
+            : theParticipants?.length > MAX_NAMES
+            ? theParticipants.slice(0, MAX_NAMES)
+            : theParticipants;
+
     const [winner, setWinner] = useState();
-    const winnerIndex = participants.length - 30;
     const namesRef = useRef();
     const nameSize = () => $(".participants > p")[0].clientHeight;
 
@@ -87,6 +101,7 @@ function Raffler() {
                 <div className="winner"></div>
                 <div ref={namesRef} className="participants">
                     {participants
+                        .slice(0, winnerIndex + 30)
                         .map((p, i) => (i === winnerIndex ? winner || p : p))
                         .reverse()
                         .map((participant) => (
@@ -100,17 +115,10 @@ function Raffler() {
             <div style={{ display: "flex" }}>
                 <button
                     onClick={() => {
-                        loop(20, 1, participants.length - 30);
+                        loop(20, 1, winnerIndex);
                     }}
                 >
                     Spin
-                </button>
-                <button
-                    onClick={() => {
-                        revealWinner();
-                    }}
-                >
-                    reveal
                 </button>
             </div>
         </div>
