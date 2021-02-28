@@ -9,7 +9,6 @@ body {
 
 .app-container {
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -271,5 +270,28 @@ body {
 }
 
 .highlighted {
-    color: red;
+    color: $secondary;
+}
+
+.draw-button {
+    padding: 10px 30px;
+    width: auto;
+    text-transform: uppercase;
+    color: #fff;
+    background: $secondary;
+    border: none;
+    border-radius: 13px;
+    outline: none;
+    cursor: pointer;
+    margin: 0 auto;
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 40px;
+    transition: box-shadow 0.2s ease-out;
+    &:hover {
+        box-shadow: 0 15px 10px rgba(0, 0, 0, 0.26);
+    }
+    &:active {
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.16);
+    }
 }

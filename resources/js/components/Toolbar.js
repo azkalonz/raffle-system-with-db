@@ -8,7 +8,7 @@ function Toolbar(props) {
                 <Typography variant="h6">Lucky Winners</Typography>
             </div>
             <div className="actions">
-                <Button startIcon={<Icon>list</Icon>}>View All</Button>
+                {/* <Button startIcon={<Icon>list</Icon>}>View All</Button> */}
             </div>
         </div>
     );

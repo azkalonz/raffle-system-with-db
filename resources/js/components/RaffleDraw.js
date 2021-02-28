@@ -19,6 +19,8 @@ function RaffleDraw({ history }) {
             const { data } = resp;
             if (data) {
                 addWinner(data);
+                $("#winner")[0].currentTime = 0;
+                $("#winner")[0].play();
                 history.replace("/" + data.id);
             } else {
                 hasErrors(resp, (error, options) => {

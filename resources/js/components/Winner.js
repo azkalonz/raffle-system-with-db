@@ -81,7 +81,7 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                 open={isExpanded}
                 onClick={() => setExpanded(false)}
                 style={{
-                    background: "rgba(255,255,255,0.7)",
+                    background: "rgba(255,255,255,0.95)",
                     zIndex: 2,
                 }}
             />

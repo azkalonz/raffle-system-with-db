@@ -28,6 +28,9 @@ function Home({ match, history }) {
 
     return (
         <div className="app-container">
+            <audio src="/mp3/spin.mp3" id="spin" />
+            <audio src="/mp3/collect.mp3" id="collect" />
+            <audio src="/mp3/winner.mp3" id="winner" />
             <WinnerList id={id} />
             <RaffleDraw history={history} />
         </div>
