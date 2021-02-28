@@ -1,46 +1,38 @@
 import { Tabs, Typography } from "@material-ui/core";
 import { useStoreState } from "easy-peasy";
-import { slice } from "lodash";
 import React from "react";
 import Toolbar from "./Toolbar";
 import Winner from "./Winner";
 
 function WinnerList({ id }) {
-    const { winners: participants } = useStoreState((states) => states.winners);
-    const parts = slice(participants, 0, 10);
+    const { winners } = useStoreState((states) => states.winners);
     return (
         <div className="winners-list">
-            {!!!parts?.length && (
+            {!!!winners?.length ? (
                 <div
                     style={{
                         width: "100%",
                         height: "100%",
                         textAlign: "center",
-                        transform: "translateY(70px)",
                     }}
                 >
                     <Typography color="textSecondary" variant="h4">
-                        None
+                        No winners
                     </Typography>
                 </div>
-            )}
-            <Tabs value={0} variant="scrollable">
-                {parts
-                    ?.map((participant) => ({
-                        ...participant,
-                        school: {
-                            ...participant.school,
-                            picture: "/img/school/uc.png",
-                        },
-                    }))
-                    .map((participant, index) => (
+            ) : (
+                <Tabs value={0} variant="scrollable">
+                    {winners?.map((win, index) => (
                         <Winner
-                            participant={participant}
+                            participant={win.participant}
+                            win={win}
                             key={index}
-                            isSelected={parseInt(id) === participant.id}
+                            isSelected={parseInt(id) === parseInt(win.id)}
                         />
                     ))}
-            </Tabs>
+                </Tabs>
+            )}
+
             <Toolbar />
         </div>
     );

@@ -15,4 +15,9 @@ class Participant extends Model
     {
         return $this->hasOne(School::class, "id", "school_id");
     }
+
+    public function wins()
+    {
+        return $this->hasMany(Winner::class, "participant_id", "id");
+    }
 }

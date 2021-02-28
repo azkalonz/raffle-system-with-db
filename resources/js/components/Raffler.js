@@ -1,15 +1,14 @@
-import { CircularProgress, Typography } from "@material-ui/core";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import { Typography } from "@material-ui/core";
+import { useStoreState } from "easy-peasy";
 import { random, sample, uniqueId } from "lodash";
 import React, { useCallback, useRef, useState } from "react";
 
 const MAX_NAMES = MAX_NAMES;
 const winnerIndex = 970;
 
-function Raffler() {
+function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
     const [saving, setSaving] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { addWinner } = useStoreActions((states) => states.winners);
     const { participants: theParticipants } = useStoreState(
         (states) => states.participants
     );
@@ -67,8 +66,8 @@ function Raffler() {
             `.participants > p:gt(20):lt(40):contains('${winner.name}')`
         ).addClass("highlighted");
         window.clearInterval(window.highlightInterval);
-        addWinner(winner);
         $(namesRef.current).off();
+        onWinner(winner);
     }, []);
 
     const translateYValue = () =>
@@ -98,7 +97,9 @@ function Raffler() {
     return participants ? (
         <div className="raffler-container">
             <div className="wrapper">
-                <div className="winner"></div>
+                <div
+                    className={["winner", isLoading ? "saving" : ""].join(" ")}
+                ></div>
                 <div ref={namesRef} className="participants">
                     {participants
                         .slice(0, winnerIndex + 30)
@@ -115,7 +116,8 @@ function Raffler() {
             <div style={{ display: "flex" }}>
                 <button
                     onClick={() => {
-                        loop(20, 1, winnerIndex);
+                        if (!inputRef?.current?.value || isLoading) return;
+                        loop(1, 1, winnerIndex);
                     }}
                 >
                     Spin

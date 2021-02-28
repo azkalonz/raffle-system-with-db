@@ -1,22 +1,26 @@
 import { Backdrop, Divider, Typography } from "@material-ui/core";
 import { AnimateSharedLayout, motion } from "framer-motion";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Winner({ participant, isSelected }) {
-    const history = useHistory();
+function Winner({ participant, isSelected, win }) {
     const [isExpanded, setExpanded] = useState(isSelected);
-
+    useEffect(() => {
+        setExpanded(isSelected);
+    }, [isSelected]);
     return (
         <AnimateSharedLayout>
             {isExpanded ? (
                 <Expanded
+                    win={win}
                     participant={participant}
                     setExpanded={setExpanded}
                     isExpanded={isExpanded}
                 />
             ) : (
                 <Compact
+                    win={win}
                     participant={participant}
                     setExpanded={setExpanded}
                     isExpanded={isExpanded}
@@ -25,7 +29,7 @@ function Winner({ participant, isSelected }) {
         </AnimateSharedLayout>
     );
 }
-function Expanded({ participant, setExpanded, isExpanded }) {
+function Expanded({ participant, setExpanded, isExpanded, win }) {
     const history = useHistory();
 
     return (
@@ -51,7 +55,7 @@ function Expanded({ participant, setExpanded, isExpanded }) {
                         <div className="details">
                             <motion.div layoutId="name" className="name">
                                 <Typography variant="h3">
-                                    {participant.name} won <b>iPad</b>
+                                    {participant.name} won <b>{win.item}</b>
                                 </Typography>
                             </motion.div>
                             <motion.div
@@ -66,7 +70,7 @@ function Expanded({ participant, setExpanded, isExpanded }) {
                                     {participant.school.name}
                                 </Typography>
                                 <Typography color="textSecondary" variant="h5">
-                                    ⏳ Just now
+                                    ⏳ {moment(win.created_at).fromNow()}
                                 </Typography>
                             </motion.div>
                         </div>
@@ -85,7 +89,7 @@ function Expanded({ participant, setExpanded, isExpanded }) {
     );
 }
 
-function Compact({ participant, setExpanded }) {
+function Compact({ participant, setExpanded, win }) {
     const history = useHistory();
 
     return (
@@ -105,7 +109,7 @@ function Compact({ participant, setExpanded }) {
                     className="winner"
                     onClick={() => {
                         setExpanded(true);
-                        history.replace("/" + participant.id);
+                        history.replace("/" + win.id);
                     }}
                 >
                     <motion.div layoutId={"picture"} className="picture">
@@ -123,9 +127,7 @@ function Compact({ participant, setExpanded }) {
                             transition={{ duration: 0.2, delay: 0.15 }}
                             className="item"
                         >
-                            <Typography variant="h5">
-                                iPad {participant.id}
-                            </Typography>
+                            <Typography variant="h5">{win.item}</Typography>
                             <Divider
                                 style={{
                                     width: "10%",
@@ -139,7 +141,7 @@ function Compact({ participant, setExpanded }) {
                                 {participant.name}
                             </Typography>
                             <Typography color="textSecondary">
-                                Just now
+                                {moment(win.created_at).fromNow()}
                             </Typography>
                         </motion.div>
                         <motion.div
