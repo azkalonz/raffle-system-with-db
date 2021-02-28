@@ -6,7 +6,7 @@ import Toolbar from "./Toolbar";
 import Winner from "./Winner";
 
 function WinnerList({ id }) {
-    const { participants } = useStoreState((states) => states.participants);
+    const { winners: participants } = useStoreState((states) => states.winners);
     const parts = slice(participants, 0, 10);
     return (
         <div className="winners-list">

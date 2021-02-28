@@ -246,3 +246,7 @@ body {
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
+
+.highlighted {
+  color: red;
+}
