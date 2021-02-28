@@ -19,6 +19,7 @@ npm install
 
 ```bash
 php artisan migrate --seed
+php artisan passport:install
 ```
 
 -   Starting the app
@@ -32,3 +33,5 @@ php artisan serve
 ```bash
 npm run watch
 ```
+
+-   Open `http://localhost:8000/login`. Test user email `admin@psite7.com` password `V8YY663p`
