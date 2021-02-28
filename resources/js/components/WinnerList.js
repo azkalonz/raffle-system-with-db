@@ -1,17 +1,31 @@
-import { Tabs } from "@material-ui/core";
+import { Tabs, Typography } from "@material-ui/core";
 import { useStoreState } from "easy-peasy";
 import { slice } from "lodash";
 import React from "react";
 import Toolbar from "./Toolbar";
 import Winner from "./Winner";
 
-function WinnerList({ id = 1 }) {
+function WinnerList({ id }) {
     const { participants } = useStoreState((states) => states.participants);
-
+    const parts = slice(participants, 0, 10);
     return (
         <div className="winners-list">
+            {!!!parts?.length && (
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        textAlign: "center",
+                        transform: "translateY(70px)",
+                    }}
+                >
+                    <Typography color="textSecondary" variant="h4">
+                        None
+                    </Typography>
+                </div>
+            )}
             <Tabs value={0} variant="scrollable">
-                {slice(participants, 0, 30)
+                {parts
                     ?.map((participant) => ({
                         ...participant,
                         school: {

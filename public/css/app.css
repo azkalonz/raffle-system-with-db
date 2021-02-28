@@ -5,11 +5,14 @@ body {
 }
 
 .app-container {
-  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .winners-list {
+  min-height: 220px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -151,4 +154,95 @@ body {
 }
 .winner-container .winner .details .school {
   color: #838383;
+}
+
+.raffle-container {
+  width: 80%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.raffle-container .wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+}
+.raffle-container .raffle-item {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #0079f5;
+  font-weight: 700;
+}
+.raffle-container .raffler-container {
+  height: 330px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.raffle-container .raffler-container::before, .raffle-container .raffler-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 115px;
+  z-index: 1;
+}
+.raffle-container .raffler-container::before {
+  top: 0;
+  background: linear-gradient(#fff, transparent);
+}
+.raffle-container .raffler-container::after {
+  bottom: 0;
+  background: linear-gradient(transparent, #fff);
+}
+.raffle-container .raffler-container .winner {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #0079f5;
+  width: 100%;
+  height: 70px;
+}
+.raffle-container .raffler-container .participants {
+  position: absolute;
+  transform-origin: bottom;
+  bottom: 144px;
+  text-align: center;
+  z-index: -1;
+  width: 100%;
+}
+.raffle-container .raffler-container .participants p {
+  font-size: 2rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.spinning {
+  -webkit-animation: spinning;
+          animation: spinning;
+  -webkit-animation-duration: 15s;
+          animation-duration: 15s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: cubic-bezier(0, 1.05, 0.75, 1);
+          animation-timing-function: cubic-bezier(0, 1.05, 0.75, 1);
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
