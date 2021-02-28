@@ -75,4 +75,45 @@ const Api = {
     },
 };
 
+export function hasErrors(
+    fetchResponse = {},
+    callback = (errorMessage) => {},
+    displayUnknownError = true
+) {
+    const { errors, message, error } = fetchResponse;
+    const options = {
+        variant: "error",
+    };
+    if (errors) {
+        Object.keys(errors).map((key) => {
+            if (errors[key]?.map) {
+                if (typeof errors[key][0] === "string")
+                    callback(errors[key][0], options);
+            }
+        });
+    } else if (message) {
+        if (typeof message === "string") callback(message, options);
+    } else if (typeof fetchResponse === "string") {
+        callback(fetchResponse, options);
+    } else if (error) {
+        switch (typeof error) {
+            case "object":
+                Object.keys(error).map((key) => {
+                    if (error[key]?.map) {
+                        if (typeof error[key][0] === "string")
+                            callback(error[key][0], options);
+                    } else if (typeof error[key] === "string") {
+                        callback(error[key], options);
+                    }
+                });
+                break;
+            case "string":
+                callback(error, options);
+                break;
+        }
+    } else if (displayUnknownError) {
+        callback("Something went wrong. Please try again.", options);
+    }
+}
+
 export default Api;

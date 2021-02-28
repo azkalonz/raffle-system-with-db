@@ -1,16 +1,33 @@
-import { ThemeProvider } from "@material-ui/core";
+import { Icon, IconButton, ThemeProvider } from "@material-ui/core";
 import { StoreProvider } from "easy-peasy";
+import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import store from "./state/store";
 import theme from "./theme";
+import Home from "./views/Home";
 import Login from "./views/Login";
 
 function Index() {
+    const notistackRef = React.createRef();
+    const onClickDismiss = (key) => () => {
+        notistackRef.current.closeSnackbar(key);
+    };
     return (
         <StoreProvider store={store}>
-            <App />
+            <SnackbarProvider
+                maxSnack={3}
+                ref={notistackRef}
+                action={(key) => (
+                    <IconButton onClick={onClickDismiss(key)}>
+                        <Icon>close</Icon>
+                    </IconButton>
+                )}
+            >
+                <App />
+            </SnackbarProvider>
         </StoreProvider>
     );
 }
@@ -21,6 +38,8 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route path="/login" component={Login} exact />
+                    <PrivateRoute path={["/:id", "/"]} component={Home} exact />
+                    <Route path="*" component={() => <Redirect to="/" />} />
                 </Switch>
             </BrowserRouter>
         </ThemeProvider>
