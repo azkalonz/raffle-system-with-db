@@ -77,7 +77,7 @@ function Home({ match, history }) {
                         </a>
                     </div>
                     <div style={{ float: "right" }}>
-                        Design by Andre Guinita
+                        Designed by Andre Guinita
                     </div>
                 </Grid>
             </Grid>

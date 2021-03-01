@@ -6,7 +6,7 @@ import moment from "moment";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useRef, useState } from "react";
 
-const MAX_NAMES = MAX_NAMES;
+const MAX_NAMES = 1000;
 const DURATION = 20;
 const ITERATION = 1;
 const winnerIndex = 970;
@@ -36,12 +36,13 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
 
     const loop = useCallback(
         (duration = 1, iteration = 1, index) => {
+            window.clearInterval(window.colorWinner);
             setSpinning(true);
             RAFFLE_STARTED = new Date();
             const newWinner = sample(participants);
             setWinner(newWinner);
             const position = index * nameSize();
-            setKeyframes(position + random(-10, 10));
+            setKeyframes(position + random(-3, 3));
             $(namesRef.current).attr("style", "").removeClass("spinning");
             setTimeout(() => {
                 playSound(true);
@@ -76,10 +77,12 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
     const revealWinner = useCallback((winner) => {
         window.clearInterval(window.highlightInterval);
         $(`.highlighted`).removeClass("highlighted");
-        console.log($(`.participants > p:contains('${winner.name}')`));
-        $(
-            `.participants > p:gt(20):lt(40):contains('${winner.name}')`
-        ).addClass("highlighted");
+        window.colorWinner = setInterval(() => {
+            $(`.participants > p:gt(20):lt(40):contains('${winner.name}')`).css(
+                "color",
+                "#1554f5"
+            );
+        }, 0);
         playSound(false);
         onWinner(winner);
         setSpinning(false);
