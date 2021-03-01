@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Winner;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class WinnerController extends Controller
         return response()->json(Winner::orderBy('id', 'desc')->get()->map(function ($win) {
             $win->participant;
             $win->participant->school;
+            $win->item;
             return $win;
         }));
     }
@@ -30,12 +32,23 @@ class WinnerController extends Controller
     {
         $request->validate([
             "participant_id" => "exists:participants,id",
-            "item" => "required|string"
         ]);
-        $winner = Winner::create($request->only(["participant_id", "item"]));
+
+        if (!$request->item_id) {
+            $request->validate([
+                "item_name" => "required"
+            ]);
+            $item = Item::create(["name" => $request->item_name]);
+            $id = $item->id;
+        } else {
+            $id = $request->item_id;
+        }
+
+        $winner = Winner::create(["participant_id" => $request->participant_id, "item_id" => $id]);
         $winner = Winner::find($winner->id);
         $winner->participant;
         $winner->participant->school;
+        $winner->item;
         return response()->json($winner);
     }
 

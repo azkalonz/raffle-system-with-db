@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@material-ui/core";
 import { useStoreState } from "easy-peasy";
 import { motion } from "framer-motion";
 import { random, sample, uniqueId } from "lodash";
@@ -15,6 +15,7 @@ let SOUND_INTERVAL = 40;
 let RAFFLE_STARTED = 0;
 
 function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
+    const [isSpinning, setSpinning] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const { participants: theParticipants } = useStoreState(
         (states) => states.participants
@@ -35,6 +36,7 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
 
     const loop = useCallback(
         (duration = 1, iteration = 1, index) => {
+            setSpinning(true);
             RAFFLE_STARTED = new Date();
             const newWinner = sample(participants);
             setWinner(newWinner);
@@ -80,6 +82,7 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
         ).addClass("highlighted");
         playSound(false);
         onWinner(winner);
+        setSpinning(false);
     }, []);
 
     const playSound = (play) => {
@@ -166,7 +169,10 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                 whileTap={{
                     scale: 0.9,
                 }}
-                className="draw-button"
+                className={[
+                    "draw-button",
+                    isSpinning ? "spin" : "not-spin",
+                ].join(" ")}
                 onClick={() => {
                     if (!inputRef?.current?.value || isLoading) {
                         enqueueSnackbar(
@@ -182,7 +188,13 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                     loop(DURATION, ITERATION, winnerIndex);
                 }}
             >
-                START!
+                {isSpinning ? (
+                    <CircularProgress
+                        style={{ color: "#fff", transformOrigin: "center" }}
+                    />
+                ) : (
+                    "START!"
+                )}
             </motion.button>
         </>
     ) : null;

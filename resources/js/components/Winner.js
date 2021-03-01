@@ -83,7 +83,7 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                                     on winning the
                                 </Typography>
                                 <Typography className="item">
-                                    {win.item}
+                                    {win.item.name}
                                 </Typography>
                                 <Typography color="textSecondary" variant="h5">
                                     ⏳ {moment(win.created_at).fromNow()}
@@ -142,7 +142,9 @@ function Compact({ participant, setExpanded, win }) {
                             transition={{ duration: 0.2, delay: 0.15 }}
                             className="item"
                         >
-                            <Typography variant="h5">{win.item}</Typography>
+                            <Typography variant="h5">
+                                {win.item.name}
+                            </Typography>
                             <Divider
                                 style={{
                                     width: "10%",

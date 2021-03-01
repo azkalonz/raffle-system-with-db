@@ -14,6 +14,7 @@ function Home({ match, history }) {
         (states) => states.participants
     );
     const { getWinners } = useStoreActions((states) => states.winners);
+    const { getItems } = useStoreActions((states) => states.items);
 
     useEffect(() => {
         getParticipants((resp) => {
@@ -26,6 +27,11 @@ function Home({ match, history }) {
                 enqueueSnackbar(error, options);
             });
         });
+        getItems((resp) => {
+            hasErrors(resp, (error, options) => {
+                enqueueSnackbar(error, options);
+            });
+        });
     }, []);
 
     return (
@@ -33,6 +39,16 @@ function Home({ match, history }) {
             <audio src="/mp3/spin.mp3" id="spin" />
             <audio src="/mp3/collect.mp3" id="collect" />
             <audio src="/mp3/winner.mp3" id="winner" />
+            <img
+                src="/img/uc.png"
+                width="140"
+                alt="UCLM #1"
+                style={{
+                    position: "fixed",
+                    top: 13,
+                    left: 13,
+                }}
+            />
             <WinnerList id={id} />
             <RaffleDraw history={history} />
             <Grid

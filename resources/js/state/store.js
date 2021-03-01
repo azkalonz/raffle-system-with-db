@@ -53,6 +53,25 @@ export default createStore(
                 state.winners.unshift(payload);
             }),
         }),
+        items: persist({
+            items: [],
+            getItems: thunk((actions, callback) => {
+                Api.get("/api/items").then((resp) => {
+                    const { data } = resp;
+                    if (data) {
+                        actions.setItems(data);
+                    } else {
+                        callback(resp);
+                    }
+                });
+            }),
+            setItems: action((state, payload) => {
+                state.items = payload;
+            }),
+            addWinner: action((state, payload) => {
+                state.items.unshift(payload);
+            }),
+        }),
     },
     {
         version: 1,

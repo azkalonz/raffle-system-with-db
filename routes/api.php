@@ -23,6 +23,7 @@ Route::post('login', "AuthController@login");
 Route::middleware('auth:api')->group(function () {
     Route::get('participants', 'ParticipantController@index');
     Route::get('winners', 'WinnerController@index');
+    Route::get('items', 'ItemController@index');
     Route::post('winner', 'WinnerController@create');
     Route::delete('winners', 'WinnerController@destroy');
 });

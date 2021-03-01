@@ -57,9 +57,9 @@ function Toolbar() {
                 </DialogActions>
             </Dialog>
             <div className="toolbar">
-                <div className="title">
+                {/* <div className="title">
                     <Typography variant="h6">Lucky Winners</Typography>
-                </div>
+                </div> */}
                 <div className="actions">
                     <Button
                         startIcon={<Icon>delete</Icon>}

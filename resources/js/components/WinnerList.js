@@ -40,27 +40,15 @@ function WinnerList({ id }) {
                         paddingTop: 30,
                     }}
                 >
+                    <WinnersListTitle />
+
                     <Typography color="textSecondary" variant="h4">
                         No winners
                     </Typography>
                 </div>
             ) : (
                 <Grid container spacing={1} direction="column">
-                    <Box width="100%" textAlign="center" p={3} pb={5}>
-                        <Typography
-                            variant="h3"
-                            color="primary"
-                            style={{ fontWeight: 700 }}
-                        >
-                            Winners
-                            <br />
-                            List
-                        </Typography>
-                        <img src="/img/trophy.svg" width="40" alt="Winners" />
-                    </Box>
-                    <Divider />
-                    <br />
-                    <br />
+                    <WinnersListTitle />
                     {winners?.map((win, index) => (
                         <Grid key={index} item>
                             <Winner
@@ -72,8 +60,36 @@ function WinnerList({ id }) {
                     ))}
                 </Grid>
             )}
-            <Toolbar />
         </motion.div>
+    );
+}
+
+function WinnersListTitle() {
+    return (
+        <>
+            <Box
+                width="100%"
+                textAlign="center"
+                p={3}
+                pb={5}
+                position="relative"
+            >
+                <Typography
+                    variant="h3"
+                    color="primary"
+                    style={{ fontWeight: 700 }}
+                >
+                    Winners
+                    <br />
+                    List
+                </Typography>
+                <img src="/img/trophy.svg" width="40" alt="Winners" />
+                <Toolbar />
+            </Box>
+            <Divider />
+            <br />
+            <br />
+        </>
     );
 }
 

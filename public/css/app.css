@@ -272,6 +272,17 @@ a {
   justify-content: center;
   overflow: auto;
 }
+.raffle-container .raffle-item-container {
+  margin-bottom: 100px;
+  text-align: center;
+}
+.raffle-container .raffle-item-container:hover .select {
+  opacity: 1;
+}
+.raffle-container .raffle-item-container .select {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
 .raffle-container .raffle-item {
   background: transparent;
   border: none;
@@ -280,10 +291,10 @@ a {
   text-align: center;
   margin: 0 auto;
   display: block;
-  font-size: 2rem;
-  color: #1554f5;
-  font-weight: 700;
-  margin-bottom: 100px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 96px;
+  line-height: 144px;
 }
 .raffle-container .raffler-container {
   height: 330px;
@@ -389,14 +400,22 @@ a {
   border-radius: 13px;
   outline: none;
   cursor: pointer;
-  margin: 0 auto;
   font-size: 3rem;
   font-weight: 500;
-  margin-bottom: 40px;
+  margin: 40px auto;
   transition: box-shadow 0.2s ease-out;
   background: #1554f5;
   box-shadow: 0px 4px 17px 14px rgba(0, 0, 0, 0.06);
   border-radius: 67px;
+}
+.draw-button.spin {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 .draw-button:hover {
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.26);
