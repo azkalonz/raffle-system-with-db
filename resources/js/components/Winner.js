@@ -35,7 +35,9 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
     return (
         <>
             <div className="winner-container" style={{ zIndex: 3 }}>
-                <div
+                <motion.div
+                    layout
+                    layoutId="winner"
                     className="winner open"
                     onClick={() => {
                         setExpanded(false);
@@ -46,6 +48,8 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                         <img src="/img/confetti.svg" alt="confetti" />
                     </div>
                     <div>
+                        <div className="congrats">Congratulations!</div>
+
                         <motion.div layoutId={"picture"} className="picture">
                             <img
                                 src={participant.school.picture}
@@ -54,8 +58,11 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                         </motion.div>
                         <div className="details">
                             <motion.div layoutId="name" className="name">
-                                <Typography variant="h3">
-                                    {participant.name} won <b>{win.item}</b>
+                                <Typography
+                                    variant="h3"
+                                    style={{ fontWeight: 700 }}
+                                >
+                                    {participant.name}
                                 </Typography>
                             </motion.div>
                             <motion.div
@@ -66,8 +73,17 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                                 layoutId="school"
                                 className="school"
                             >
-                                <Typography variant="h4">
+                                <Typography
+                                    variant="h4"
+                                    style={{ fontSize: 29 }}
+                                >
                                     {participant.school.name}
+                                </Typography>
+                                <Typography className="winning-the">
+                                    on winning the
+                                </Typography>
+                                <Typography className="item">
+                                    {win.item}
                                 </Typography>
                                 <Typography color="textSecondary" variant="h5">
                                     ⏳ {moment(win.created_at).fromNow()}
@@ -75,15 +91,12 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                             </motion.div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
             <Backdrop
                 open={isExpanded}
                 onClick={() => setExpanded(false)}
-                style={{
-                    background: "rgba(255,255,255,0.95)",
-                    zIndex: 2,
-                }}
+                className="backdrop"
             />
         </>
     );
@@ -105,7 +118,9 @@ function Compact({ participant, setExpanded, win }) {
                     scale: 1.1,
                 }}
             >
-                <div
+                <motion.div
+                    layout
+                    layoutId="winner"
                     className="winner"
                     onClick={() => {
                         setExpanded(true);
@@ -155,7 +170,7 @@ function Compact({ participant, setExpanded, win }) {
                             <Typography>{participant.school.name}</Typography>
                         </motion.div>
                     </div>
-                </div>
+                </motion.div>
             </motion.div>
         </div>
     );

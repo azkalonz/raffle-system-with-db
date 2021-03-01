@@ -45,17 +45,22 @@ function Home({ match, history }) {
                     <Link to="/auth/logout">Logout</Link>
                 </Grid>
                 <Grid item>
-                    Create with ♥ by Mark Joseph&nbsp;&nbsp;
-                    <a
-                        href="https://www.facebook.com/average.g0at/"
-                        target="_blank"
-                    >
-                        FB
-                    </a>
-                    &nbsp;|&nbsp;
-                    <a href="https://github.com/azkalonz" target="_blank">
-                        Github
-                    </a>
+                    <div>
+                        Create with ♥ by Mark Joseph&nbsp;&nbsp;
+                        <a
+                            href="https://www.facebook.com/average.g0at/"
+                            target="_blank"
+                        >
+                            FB
+                        </a>
+                        &nbsp;|&nbsp;
+                        <a href="https://github.com/azkalonz" target="_blank">
+                            Github
+                        </a>
+                    </div>
+                    <div style={{ float: "right" }}>
+                        Design by Andre Guinita
+                    </div>
                 </Grid>
             </Grid>
         </div>

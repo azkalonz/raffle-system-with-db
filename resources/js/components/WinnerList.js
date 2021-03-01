@@ -1,13 +1,36 @@
-import { Tabs, Typography } from "@material-ui/core";
+import { Box, Divider, Grid, Icon, Typography } from "@material-ui/core";
 import { useStoreState } from "easy-peasy";
-import React from "react";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 import Toolbar from "./Toolbar";
 import Winner from "./Winner";
 
 function WinnerList({ id }) {
     const { winners } = useStoreState((states) => states.winners);
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
-        <div className="winners-list">
+        <motion.div
+            layout
+            className={[
+                "winners-list",
+                id ? "open" : "close",
+                menuOpen ? "peak" : "no-peak",
+            ].join(" ")}
+        >
+            <div
+                className="trophy-button"
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+                {menuOpen ? (
+                    <Icon style={{ color: "#fff" }} fontSize="large">
+                        close
+                    </Icon>
+                ) : (
+                    <img src="/img/trophy.svg" width="40" alt="Winners" />
+                )}
+            </div>
+
             {!!!winners?.length ? (
                 <div
                     style={{
@@ -22,20 +45,35 @@ function WinnerList({ id }) {
                     </Typography>
                 </div>
             ) : (
-                <Tabs value={0} variant="scrollable">
+                <Grid container spacing={1} direction="column">
+                    <Box width="100%" textAlign="center" p={3} pb={5}>
+                        <Typography
+                            variant="h3"
+                            color="primary"
+                            style={{ fontWeight: 700 }}
+                        >
+                            Winners
+                            <br />
+                            List
+                        </Typography>
+                        <img src="/img/trophy.svg" width="40" alt="Winners" />
+                    </Box>
+                    <Divider />
+                    <br />
+                    <br />
                     {winners?.map((win, index) => (
-                        <Winner
-                            participant={win.participant}
-                            win={win}
-                            key={index}
-                            isSelected={parseInt(id) === parseInt(win.id)}
-                        />
+                        <Grid key={index} item>
+                            <Winner
+                                participant={win.participant}
+                                win={win}
+                                isSelected={parseInt(id) === parseInt(win.id)}
+                            />
+                        </Grid>
                     ))}
-                </Tabs>
+                </Grid>
             )}
-
             <Toolbar />
-        </div>
+        </motion.div>
     );
 }
 

@@ -7,7 +7,7 @@ import { useSnackbar } from "notistack";
 import React, { useCallback, useRef, useState } from "react";
 
 const MAX_NAMES = MAX_NAMES;
-const DURATION = 20;
+const DURATION = 1;
 const ITERATION = 1;
 const winnerIndex = 970;
 
@@ -182,7 +182,7 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                     loop(DURATION, ITERATION, winnerIndex);
                 }}
             >
-                Spin
+                START!
             </motion.button>
         </>
     ) : null;
