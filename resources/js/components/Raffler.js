@@ -7,7 +7,7 @@ import { useSnackbar } from "notistack";
 import React, { useCallback, useRef, useState } from "react";
 
 const MAX_NAMES = MAX_NAMES;
-const DURATION = 1;
+const DURATION = 20;
 const ITERATION = 1;
 const winnerIndex = 970;
 
@@ -173,6 +173,7 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                     "draw-button",
                     isSpinning ? "spin" : "not-spin",
                 ].join(" ")}
+                disabled={isSpinning}
                 onClick={() => {
                     if (!inputRef?.current?.value || isLoading) {
                         enqueueSnackbar(

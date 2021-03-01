@@ -3,6 +3,7 @@ import { useStoreActions } from "easy-peasy";
 import { useSnackbar } from "notistack";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Hands from "../components/Hands";
 import RaffleDraw from "../components/RaffleDraw";
 import WinnerList from "../components/WinnerList";
 import { hasErrors } from "../util/api";
@@ -49,6 +50,7 @@ function Home({ match, history }) {
                     left: 13,
                 }}
             />
+            {id && <Hands />}
             <WinnerList id={id} />
             <RaffleDraw history={history} />
             <Grid
