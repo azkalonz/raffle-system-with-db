@@ -127,10 +127,14 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
         const keyframes = `
         @keyframes spinning {
             from {
-                transform: translateY(0);
+                transform: translateY(0) translateZ(0) perspective(1px);
+                backface-visibility: hidden;
+                -webkit-font-smoothing: subpixel-antialiased;
             }
             to {
-                transform: translateY(FINAL_POSITION);
+                transform: translateY(FINAL_POSITION) translateZ(0) perspective(1px);
+                backface-visibility: hidden;
+                -webkit-font-smoothing: subpixel-antialiased;
             }
         }`;
         style.innerHTML = keyframes.replace(/FINAL_POSITION/g, position + "px");
