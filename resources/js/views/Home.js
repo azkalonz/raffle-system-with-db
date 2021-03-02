@@ -76,6 +76,7 @@ function Home({ match, history }) {
                             position: "fixed",
                             top: 13,
                             left: 13,
+                            zIndex: 4,
                         }}
                     />
                     {id && <Hands />}

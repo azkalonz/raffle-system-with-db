@@ -277,6 +277,7 @@ a {
     width: 80%;
     margin: 0 auto;
     height: 100%;
+    min-height: 770px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -458,10 +459,14 @@ a {
     left: 0;
     z-index: 9999;
     pointer-events: none;
+    img {
+        width: 100%;
+    }
     .ok,
     .like {
         position: absolute;
         bottom: 0;
+        width: 20%;
     }
     .ok {
         left: 0;
