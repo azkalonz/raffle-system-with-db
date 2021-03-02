@@ -25,8 +25,9 @@ export default createStore(
                     const { data } = resp;
                     if (data) {
                         actions.setParticipants(data);
+                        callback.success(data);
                     } else {
-                        callback(resp);
+                        callback.error(resp);
                     }
                 });
             }),
@@ -41,8 +42,9 @@ export default createStore(
                     const { data } = resp;
                     if (data) {
                         actions.setWinners(data);
+                        callback.success(data);
                     } else {
-                        callback(resp);
+                        callback.error(resp);
                     }
                 });
             }),
@@ -60,8 +62,9 @@ export default createStore(
                     const { data } = resp;
                     if (data) {
                         actions.setItems(data);
+                        callback.success(data);
                     } else {
-                        callback(resp);
+                        callback.error(resp);
                     }
                 });
             }),
