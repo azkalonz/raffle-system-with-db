@@ -93,7 +93,7 @@ function Home({ match, history }) {
                         </Grid>
                         <Grid item>
                             <div>
-                                Create with ♥ by Mark Joseph&nbsp;&nbsp;
+                                Created with ♥ by Mark Joseph&nbsp;&nbsp;
                                 <a
                                     href="https://www.facebook.com/average.g0at/"
                                     target="_blank"
