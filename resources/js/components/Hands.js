@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function Hands(props) {
     const [ready, setReady] = useState(2);
-    console.log(ready);
+
     return (
         <div className="hands-container">
             <div className={["ok", !ready ? "animate" : ""].join(" ")}>

@@ -29,15 +29,15 @@ export default function Login({ history }) {
     const handleLogin = useCallback((e) => {
         e.preventDefault();
         setLoading(true);
-        console.log(emailRef, passRef);
         Api.post("/api/login", {
             email: emailRef.current.value,
             password: passRef.current.value,
         }).then((response) => {
             const { data } = response;
-            if (data) {
+            if (data && !data.message) {
                 setUser(data);
             } else {
+                if (data?.message) response = data.message;
                 hasErrors(response, (error, options) => {
                     enqueueSnackbar(error, options);
                 });

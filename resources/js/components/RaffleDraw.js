@@ -17,12 +17,10 @@ function RaffleDraw({ history }) {
         const selectedItem = window.item;
 
         if (!selectedItem?.id) {
-            console.log(selectedItem?.id);
             item = {
                 item_name: itemRef.current.value,
             };
         } else {
-            console.log(itemRef.current.value, selectedItem.name);
             if (itemRef.current.value === selectedItem.name)
                 item = {
                     item_id: selectedItem.id,

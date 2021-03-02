@@ -95,7 +95,6 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                 const diff = moment().diff(moment(RAFFLE_STARTED));
                 $("#spin")[0].currentTime = 0;
                 $("#spin")[0].play();
-                console.log(SOUND_INTERVAL, diff);
 
                 SOUND_INTERVAL = diff / 50;
 

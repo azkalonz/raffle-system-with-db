@@ -27,6 +27,21 @@ a {
     backdrop-filter: blur(20px);
 }
 
+.raffle-container {
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+.background {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -44;
+    height: 100%;
+}
+
 .winners-list {
     min-height: 220px;
     user-select: none;
@@ -309,8 +324,9 @@ a {
         display: block;
         font-style: normal;
         font-weight: bold;
-        font-size: 96px;
+        font-size: 72px;
         line-height: 144px;
+        color: $primary;
     }
     .raffler-container {
         height: 330px;
@@ -381,7 +397,7 @@ a {
             transform-origin: bottom;
             bottom: 144px;
             text-align: center;
-            z-index: -1;
+            z-index: 0;
             width: 100%;
             p {
                 font-size: 2rem;
@@ -509,4 +525,11 @@ a {
     100% {
         transform: rotate(0) translateY(10px) translateX(0);
     }
+}
+
+#container,
+#canvas3d,
+.background {
+    touch-action: none;
+    pointer-events: none;
 }
