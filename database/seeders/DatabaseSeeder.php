@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => "Admin",
-            'email' => 'admin@psite7.com',
-            'password' => bcrypt("V8YY663p"),
+            'email' => 'markjosephjudaya@gmail.com',
+            'password' => bcrypt("123456"),
         ]);
 
         DB::table('schools')->insert([
@@ -38,17 +38,21 @@ class DatabaseSeeder extends Seeder
 
         DB::table('items')->insert([
             [
-                "name" => "iPhone 12"
+                "name" => "ELoad",
+                "quantity" => 20,
+                "amount" => 200
             ], [
-                "name" => "iPhone 13"
+                "name" => "Jollibee",
+                "quantity" => 15,
+                "amount" => 180
             ], [
-                "name" => "iPhone 14"
+                "name" => "Grabfood",
+                "quantity" => 13,
+                "amount" => 100
             ], [
-                "name" => "iPhone 15"
-            ], [
-                "name" => "iPhone 16"
-            ], [
-                "name" => "iPhone 17"
+                "name" => "Q & A (ELoad)",
+                "quantity" => 5,
+                "amount" => 400
             ],
         ]);
 

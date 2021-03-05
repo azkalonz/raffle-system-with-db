@@ -85,6 +85,13 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                                 <Typography className="item">
                                     {win.item.name}
                                 </Typography>
+                                {win.item?.amount && (
+                                    <sup>
+                                        (worth PHP {win.item.amount.toFixed(2)})
+                                    </sup>
+                                )}
+                                <br />
+                                <br />
                                 <Typography color="textSecondary" variant="h5">
                                     ⏳ {moment(win.created_at).fromNow()}
                                 </Typography>

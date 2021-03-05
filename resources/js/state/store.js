@@ -1,4 +1,5 @@
 import { action, createStore, persist, thunk } from "easy-peasy";
+import { find } from "lodash";
 import Api from "../util/api";
 
 export default createStore(
@@ -67,6 +68,10 @@ export default createStore(
                         callback.error(resp);
                     }
                 });
+            }),
+            updateItem: action((state, item) => {
+                const index = state.items.findIndex((q) => q.id == item.id);
+                state.items[index] = item;
             }),
             setItems: action((state, payload) => {
                 state.items = payload;

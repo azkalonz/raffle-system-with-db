@@ -6,14 +6,6 @@ import moment from "moment";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useRef, useState } from "react";
 
-const MAX_NAMES = 1000;
-const DURATION = 20;
-const ITERATION = 1;
-const winnerIndex = 970;
-
-let SOUND_INTERVAL = 40;
-let RAFFLE_STARTED = 0;
-
 function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
     const [isSpinning, setSpinning] = useState(false);
     const { enqueueSnackbar } = useSnackbar();

@@ -43,6 +43,8 @@ class WinnerController extends Controller
         } else {
             $id = $request->item_id;
         }
+        $the_item = Item::where("id", $id)->first();
+        Item::where("id", $id)->update(["quantity" => $the_item->quantity - 1]);
 
         $winner = Winner::create(["participant_id" => $request->participant_id, "item_id" => $id]);
         $winner = Winner::find($winner->id);
