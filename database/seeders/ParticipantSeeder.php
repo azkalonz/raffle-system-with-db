@@ -38,7 +38,7 @@ class ParticipantSeeder extends Seeder
                 }
 
                 $participant = [
-                    "name" => e("{$data[0]} {$data[2]} {$data[1]}"),
+                    "name" => e("{$data[0]}, {$data[1]} {$data[2]}"),
                     "school_id" => $id
                 ];
                 array_push($participants, $participant);
