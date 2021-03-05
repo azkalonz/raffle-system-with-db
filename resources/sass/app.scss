@@ -355,6 +355,12 @@ a {
             bottom: 0;
             background: linear-gradient(transparent, #fff);
         }
+        .won {
+            background: $primary;
+        }
+        .lose {
+            color: transparent;
+        }
         .winner {
             border-top: 4px solid;
             border-bottom: 4px solid;

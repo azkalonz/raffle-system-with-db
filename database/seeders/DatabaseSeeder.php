@@ -38,21 +38,25 @@ class DatabaseSeeder extends Seeder
 
         DB::table('items')->insert([
             [
-                "name" => "ELoad",
+                "name" => "E-Load",
                 "quantity" => 20,
                 "amount" => 200
             ], [
-                "name" => "Jollibee",
+                "name" => "Jollibee Gift Voucher",
                 "quantity" => 15,
                 "amount" => 180
             ], [
-                "name" => "Grabfood",
+                "name" => "Grabfood Gift Voucher",
                 "quantity" => 13,
                 "amount" => 100
             ], [
-                "name" => "Q & A (ELoad)",
+                "name" => "GCash",
                 "quantity" => 5,
-                "amount" => 400
+                "amount" => 300
+            ], [
+                "name" => "GCash",
+                "quantity" => 5,
+                "amount" => 500
             ],
         ]);
 

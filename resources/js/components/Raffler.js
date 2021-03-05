@@ -1,13 +1,14 @@
 import { CircularProgress, Typography } from "@material-ui/core";
 import { useStoreState } from "easy-peasy";
 import { motion } from "framer-motion";
-import { random, sample, shuffle, uniqueId } from "lodash";
+import { find, random, sample, shuffle, uniqueId } from "lodash";
 import moment from "moment";
 import { useSnackbar } from "notistack";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
     const [isSpinning, setSpinning] = useState(false);
+    const { winners } = useStoreState((states) => states.winners);
     const { enqueueSnackbar } = useSnackbar();
     const { participants: theParticipants } = useStoreState(
         (states) => states.participants
@@ -28,11 +29,18 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
 
     const loop = useCallback(
         (duration = 1, iteration = 1, index) => {
+            $(`.won`).removeClass("won");
+            $(`.lose`).removeClass("lose");
             window.clearInterval(window.colorWinner);
             setSpinning(true);
             RAFFLE_STARTED = new Date();
-            const newWinner = sample(participants);
+            let newWinner = sample(participants);
+
+            while (!!find(winners, { participant_id: newWinner.id })) {
+                newWinner = sample(participants);
+            }
             setWinner(newWinner);
+
             const position = index * nameSize();
             setKeyframes(position + random(-3, 3));
             $(namesRef.current).attr("style", "").removeClass("spinning");
@@ -63,17 +71,18 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                 });
             }, 0);
         },
-        [participants]
+        [participants, winners]
     );
 
     const revealWinner = useCallback((winner) => {
         window.clearInterval(window.highlightInterval);
-        $(`.highlighted`).removeClass("highlighted");
+        $(`.participants`).addClass("lose").removeClass("highlighted");
         window.colorWinner = setInterval(() => {
             $(`.participants > p:gt(20):lt(40):contains('${winner.name}')`).css(
                 "color",
-                "#1554f5"
+                "#fff"
             );
+            $(`.winner`).addClass("won");
         }, 0);
         playSound(false);
         onWinner(winner);
