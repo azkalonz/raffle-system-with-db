@@ -20,21 +20,21 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt("123456"),
         ]);
 
-        DB::table('schools')->insert([
-            [
-                'id' => 1,
-                'name' => "University of Cebu - LM Campus",
-                'picture' => "https://universityofcebu.ethinksites.com/pluginfile.php/1/core_admin/logocompact/300x300/1597412510/UC%20logofinal.png",
-            ], [
-                'id' => 2,
-                'name' => "University of Cebu - Main Campus",
-                'picture' => "https://universityofcebu.ethinksites.com/pluginfile.php/1/core_admin/logocompact/300x300/1597412510/UC%20logofinal.png",
-            ], [
-                'id' => 3,
-                'name' => "University of Cebu - Banilad Campus",
-                'picture' => "https://universityofcebu.ethinksites.com/pluginfile.php/1/core_admin/logocompact/300x300/1597412510/UC%20logofinal.png",
-            ],
-        ]);
+        $path = __DIR__ . '/artifacts/schools.csv';
+        $schools = [];
+
+        if (($handle = fopen($path, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $school = [
+                    "name" => $data[0],
+                    "picture" => $data[1],
+                ];
+                array_push($schools, $school);
+            }
+            fclose($handle);
+        }
+
+        DB::table('schools')->insert($schools);
 
         DB::table('items')->insert([
             [

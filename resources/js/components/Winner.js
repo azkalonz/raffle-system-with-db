@@ -52,7 +52,10 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
 
                         <motion.div layoutId={"picture"} className="picture">
                             <img
-                                src={participant.school.picture}
+                                src={
+                                    "/img/school/" +
+                                    participant?.school?.picture
+                                }
                                 alt="School"
                             />
                         </motion.div>
@@ -77,7 +80,7 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                                     variant="h4"
                                     style={{ fontSize: 29 }}
                                 >
-                                    {participant.school.name}
+                                    {participant?.school?.name}
                                 </Typography>
                                 <Typography className="winning-the">
                                     on winning the
@@ -135,7 +138,10 @@ function Compact({ participant, setExpanded, win }) {
                     }}
                 >
                     <motion.div layoutId={"picture"} className="picture">
-                        <img src={participant.school.picture} alt="School" />
+                        <img
+                            src={"/img/school/" + participant?.school?.picture}
+                            alt="School"
+                        />
                     </motion.div>
                     <div className="details">
                         <motion.div
@@ -176,7 +182,7 @@ function Compact({ participant, setExpanded, win }) {
                                 opacity: 0,
                             }}
                         >
-                            <Typography>{participant.school.name}</Typography>
+                            <Typography>{participant?.school?.name}</Typography>
                         </motion.div>
                     </div>
                 </motion.div>

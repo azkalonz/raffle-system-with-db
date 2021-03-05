@@ -14,7 +14,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        return response()->json(Participant::all()->map(function ($participant) {
+        return response()->json(Participant::where("name", "!=", "")->get()->map(function ($participant) {
             $participant->school;
             return $participant;
         }));

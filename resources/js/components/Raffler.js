@@ -1,10 +1,10 @@
 import { CircularProgress, Typography } from "@material-ui/core";
 import { useStoreState } from "easy-peasy";
 import { motion } from "framer-motion";
-import { random, sample, uniqueId } from "lodash";
+import { random, sample, shuffle, uniqueId } from "lodash";
 import moment from "moment";
 import { useSnackbar } from "notistack";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
     const [isSpinning, setSpinning] = useState(false);
@@ -12,16 +12,16 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
     const { participants: theParticipants } = useStoreState(
         (states) => states.participants
     );
-    const participants =
+    const [participants, setParticipants] = useState(
         theParticipants?.length < MAX_NAMES
             ? new Array(MAX_NAMES - theParticipants.length)
                   .fill(0)
                   .map((q) => sample(theParticipants))
                   .concat(theParticipants)
             : theParticipants?.length > MAX_NAMES
-            ? theParticipants.slice(0, MAX_NAMES)
-            : theParticipants;
-
+            ? shuffle(theParticipants.slice(0, MAX_NAMES))
+            : shuffle(theParticipants)
+    );
     const [winner, setWinner] = useState();
     const namesRef = useRef();
     const nameSize = () => $(".participants > p")[0].clientHeight;
@@ -145,6 +145,13 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                     <div ref={namesRef} className="participants">
                         {participants
                             .slice(0, winnerIndex + 30)
+                            .map((q) => ({
+                                ...q,
+                                name:
+                                    q.name.length > 50
+                                        ? q.name.slice(0, 50) + "..."
+                                        : q.name,
+                            }))
                             .map((p, i) =>
                                 i === winnerIndex ? winner || p : p
                             )
@@ -184,6 +191,16 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
                         );
                         return;
                     }
+                    setParticipants(
+                        theParticipants?.length < MAX_NAMES
+                            ? new Array(MAX_NAMES - theParticipants.length)
+                                  .fill(0)
+                                  .map((q) => sample(theParticipants))
+                                  .concat(theParticipants)
+                            : theParticipants?.length > MAX_NAMES
+                            ? shuffle(theParticipants.slice(0, MAX_NAMES))
+                            : shuffle(theParticipants)
+                    );
                     loop(DURATION, ITERATION, winnerIndex);
                 }}
             >
