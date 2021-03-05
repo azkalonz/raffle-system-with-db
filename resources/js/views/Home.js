@@ -88,10 +88,7 @@ function Home({ match, history }) {
                         justify="space-between"
                         alignItems="center"
                     >
-                        <Grid item>
-                            <Link to="/auth/logout">Logout</Link>
-                        </Grid>
-                        <Grid item>
+                        <Grid item style={{ opacity: 0.5 }}>
                             <div>
                                 Created with ♥ by Mark Joseph Judaya&nbsp;&nbsp;
                                 <a
@@ -108,9 +105,10 @@ function Home({ match, history }) {
                                     Github
                                 </a>
                             </div>
-                            <div style={{ float: "right" }}>
-                                Designed by Andre Guinita
-                            </div>
+                            <div>Designed by Andre Guinita</div>
+                        </Grid>
+                        <Grid item>
+                            <Link to="/auth/logout">Logout</Link>
                         </Grid>
                     </Grid>
                 </div>

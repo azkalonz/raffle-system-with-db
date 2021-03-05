@@ -15,7 +15,7 @@ function WinnerList({ id }) {
             className={[
                 "winners-list",
                 id ? "open" : "close",
-                menuOpen ? "peak" : "no-peak",
+                menuOpen ? "peek" : "no-peek",
             ].join(" ")}
         >
             <div

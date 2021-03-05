@@ -54,7 +54,8 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                             <img
                                 src={
                                     "/img/school/" +
-                                    participant?.school?.picture
+                                    (participant?.school?.picture ||
+                                        "default.jpg")
                                 }
                                 alt="School"
                             />
@@ -139,7 +140,10 @@ function Compact({ participant, setExpanded, win }) {
                 >
                     <motion.div layoutId={"picture"} className="picture">
                         <img
-                            src={"/img/school/" + participant?.school?.picture}
+                            src={
+                                "/img/school/" +
+                                (participant?.school?.picture || "default.jpg")
+                            }
                             alt="School"
                         />
                     </motion.div>
@@ -155,8 +159,16 @@ function Compact({ participant, setExpanded, win }) {
                             transition={{ duration: 0.2, delay: 0.15 }}
                             className="item"
                         >
-                            <Typography variant="h5">
-                                {win.item.name}
+                            <Typography
+                                variant="h5"
+                                style={{ wordBreak: "break-word" }}
+                            >
+                                {win.item.name}{" "}
+                                <sup>
+                                    <small>
+                                        <b>PHP {win.item.amount}</b>
+                                    </small>
+                                </sup>
                             </Typography>
                             <Divider
                                 style={{
@@ -167,7 +179,10 @@ function Compact({ participant, setExpanded, win }) {
                             />
                         </motion.div>
                         <motion.div layoutId="name" className="name">
-                            <Typography variant="h6">
+                            <Typography
+                                variant="h6"
+                                style={{ wordBreak: "break-word" }}
+                            >
                                 {participant.name}
                             </Typography>
                             <Typography color="textSecondary">

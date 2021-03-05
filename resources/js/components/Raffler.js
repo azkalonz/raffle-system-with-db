@@ -42,7 +42,7 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
             setWinner(newWinner);
 
             const position = index * nameSize();
-            setKeyframes(position + random(-3, 3));
+            setKeyframes(position + 3.5);
             $(namesRef.current).attr("style", "").removeClass("spinning");
             setTimeout(() => {
                 playSound(true);
