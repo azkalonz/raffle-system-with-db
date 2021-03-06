@@ -29,6 +29,8 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
 
     const loop = useCallback(
         (duration = 1, iteration = 1, index) => {
+            $("#music")[0].currentTime = 3;
+            $("#music")[0].pause();
             $(`.won`).removeClass("won");
             $(`.lose`).removeClass("lose");
             window.clearInterval(window.colorWinner);
@@ -86,6 +88,8 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
         }, 0);
         playSound(false);
         onWinner(winner);
+        $("#music")[0].currentTime = 3;
+        $("#music")[0].play();
         setSpinning(false);
     }, []);
 
@@ -141,6 +145,11 @@ function Raffler({ onWinner = (winner) => {}, inputRef, isLoading }) {
         style.innerHTML = keyframes.replace(/FINAL_POSITION/g, position + "px");
         $("head").append(style);
     };
+
+    useEffect(() => {
+        $("#music")[0].currentTime = 2;
+        $("#music")[0].volume = 0.02;
+    }, []);
 
     return participants ? (
         <>

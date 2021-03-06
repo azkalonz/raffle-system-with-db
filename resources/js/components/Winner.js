@@ -91,7 +91,8 @@ function Expanded({ participant, setExpanded, isExpanded, win }) {
                                 </Typography>
                                 {win.item?.amount && (
                                     <sup>
-                                        (worth PHP {win.item.amount.toFixed(2)})
+                                        (worth PHP{" "}
+                                        {win.item?.amount?.toFixed(2)})
                                     </sup>
                                 )}
                                 <br />

@@ -76,7 +76,7 @@ function RaffleDraw({ history }) {
                     />
                     {selectedItem && (
                         <Typography variant="h4">
-                            Worth <b>PHP {selectedItem.amount.toFixed(2)}</b>
+                            Worth <b>PHP {selectedItem?.amount?.toFixed(2)}</b>
                             <sup>({selectedItem.quantity}x left)</sup>
                         </Typography>
                     )}

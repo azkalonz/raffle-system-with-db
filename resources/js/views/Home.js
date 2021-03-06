@@ -68,6 +68,12 @@ function Home({ match, history }) {
                     <audio src="/mp3/spin.mp3" id="spin" />
                     <audio src="/mp3/collect.mp3" id="collect" />
                     <audio src="/mp3/winner.mp3" id="winner" />
+                    <audio
+                        src="/mp3/music.mp3"
+                        id="music"
+                        autoPlay={true}
+                        loop={true}
+                    />
                     <img
                         src="/img/uc.png"
                         width="140"
@@ -88,7 +94,7 @@ function Home({ match, history }) {
                         justify="space-between"
                         alignItems="center"
                     >
-                        <Grid item style={{ opacity: 0.5 }}>
+                        <Grid item style={{ opacity: 0.3 }}>
                             <div>
                                 Created with ♥ by Mark Joseph Judaya&nbsp;&nbsp;
                                 <a

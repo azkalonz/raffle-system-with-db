@@ -1,5 +1,5 @@
 const MAX_NAMES = 1000;
-const DURATION = 20;
+const DURATION = 10;
 const ITERATION = 1;
 const winnerIndex = 970;
 

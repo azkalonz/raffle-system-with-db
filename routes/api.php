@@ -27,3 +27,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('winner', 'WinnerController@create');
     Route::delete('winners', 'WinnerController@destroy');
 });
+
+Route::get('winners-export', 'ExportController@index');
